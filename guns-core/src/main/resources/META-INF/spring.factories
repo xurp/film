@@ -1,0 +1,8 @@
+# AutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.geekq.guns.core.base.controller.GlobalController,\
+com.geekq.guns.core.config.DefaultFastjsonConfig,\
+com.geekq.guns.core.config.MultiDataSourceConfig,\
+com.geekq.guns.core.config.SingleDataSourceConfig,\
+com.geekq.guns.core.config.DefaultProperties,\
+com.geekq.guns.core.config.DefaultWebConfig
