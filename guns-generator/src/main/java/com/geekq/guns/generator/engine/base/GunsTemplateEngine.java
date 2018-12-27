@@ -1,7 +1,6 @@
 package com.geekq.guns.generator.engine.base;
 
 import com.geekq.guns.core.util.ToolUtil;
-import com.sun.javafx.PlatformUtil;
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.Template;
@@ -56,11 +55,11 @@ public abstract class GunsTemplateEngine extends AbstractTemplateEngine {
     protected void generateFile(String template, String filePath) {
         Template pageTemplate = groupTemplate.getTemplate(template);
         configTemplate(pageTemplate);
-        if (PlatformUtil.isWindows()) {
-            filePath = filePath.replaceAll("/+|\\\\+", "\\\\");
-        } else {
-            filePath = filePath.replaceAll("/+|\\\\+", "/");
-        }
+//        if (PlatformUtil.isWindows()) {
+//            filePath = filePath.replaceAll("/+|\\\\+", "\\\\");
+//        } else {
+//            filePath = filePath.replaceAll("/+|\\\\+", "/");
+//        }
         File file = new File(filePath);
         File parentFile = file.getParentFile();
         if (!parentFile.exists()) {

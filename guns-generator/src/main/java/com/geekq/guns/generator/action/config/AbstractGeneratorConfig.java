@@ -6,11 +6,11 @@ import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
-import com.geekq.guns.generator.engine.base.GunsTemplateEngine;
+import com.geekq.guns.generator.engine.SimpleTemplateEngine;
 import com.geekq.guns.generator.engine.config.ContextConfig;
 import com.geekq.guns.generator.engine.config.SqlConfig;
 import com.geekq.guns.core.util.FileUtil;
-import com.geekq.guns.generator.engine.SimpleTemplateEngine;
+import com.geekq.guns.generator.engine.base.GunsTemplateEngine;
 
 import java.io.File;
 import java.util.List;

@@ -35,7 +35,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value="check",method = RequestMethod.POST)
+    @RequestMapping(value="check")
     public ResponseVO check(String username){
         if(username!=null && username.trim().length()>0){
             // 当返回true的时候，表示用户名可用

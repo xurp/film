@@ -2,8 +2,8 @@ package com.geekq.guns.generator.action.config;
 
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.geekq.guns.core.support.StrKit;
 import com.geekq.guns.generator.action.model.GenQo;
+import com.geekq.guns.core.support.StrKit;
 import com.geekq.guns.core.util.ToolUtil;
 
 import java.io.File;

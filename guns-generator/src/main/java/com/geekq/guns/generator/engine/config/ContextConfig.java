@@ -20,8 +20,8 @@ public class ContextConfig {
 
     private String proPackage = "com.geekq.guns.admin";
     private String coreBasePackage = "com.geekq.guns.core";
-    private String modelPackageName = "com.geekq.guns.core.modular.system.model";        //model的包名
-    private String modelMapperPackageName = "com.geekq.guns.core.modular.system.dao";    //model的dao
+    private String modelPackageName = "com.geekq.guns.modular.system.model";        //model的包名
+    private String modelMapperPackageName = "com.geekq.guns.modular.system.dao";    //model的dao
     private String entityName;              //实体的名称
 
     private Boolean controllerSwitch = true;    //是否生成控制器代码开关
