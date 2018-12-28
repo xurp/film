@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
+    /**
+     * dubbo 启动 提供者检查 设置为false 可以认为是返回null 给服务消费者
+     */
     @Reference(interfaceClass = UserAPI.class,check = false)
     private UserAPI userAPI;
 

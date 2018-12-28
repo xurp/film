@@ -1,7 +1,8 @@
 package com.geekq.guns.rest.common.persistence.dao;
 
-import com.geekq.guns.rest.common.persistence.model.MoocUserT;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.geekq.guns.rest.common.persistence.model.CmUserT;
 
 /**
  * <p>
@@ -11,6 +12,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @author jiangzh
  * @since 2018-08-02
  */
-public interface MoocUserTMapper extends BaseMapper<MoocUserT> {
+public interface CmUserTMapper extends BaseMapper<CmUserT> {
 
 }

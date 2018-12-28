@@ -16,8 +16,8 @@ import java.io.Serializable;
  * @author jiangzh
  * @since 2018-08-02
  */
-@TableName("mooc_user_t")
-public class MoocUserT extends Model<MoocUserT> {
+@TableName("cm_user_t")
+public class CmUserT extends Model<CmUserT> {
 
     private static final long serialVersionUID = 1L;
 
@@ -209,7 +209,7 @@ public class MoocUserT extends Model<MoocUserT> {
 
     @Override
     public String toString() {
-        return "MoocUserT{" +
+        return "CmUserT{" +
         "uuid=" + uuid +
         ", userName=" + userName +
         ", userPwd=" + userPwd +
