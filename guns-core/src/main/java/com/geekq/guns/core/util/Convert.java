@@ -2,6 +2,7 @@ package com.geekq.guns.core.util;
 
 import com.geekq.guns.core.support.*;
 import com.geekq.guns.core.support.exception.ToolBoxException;
+import com.geekq.guns.core.support.*;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -53,7 +54,7 @@ public class Convert {
 			if (Date.class.isAssignableFrom(clazz)) {
 				// 判断标准日期
 				// ----2016-11-24---zhuangqian----需要加toDate(),不然beetlsql转换date类型的时候会报错----
-//				return DateTimeKit.parse(valueStr).toDate();
+				return DateTimeKit.parse(valueStr).toDate();
 			} else if (clazz == BigInteger.class) {
 				// 数学计算数字
 				return new BigInteger(valueStr);
@@ -392,6 +393,7 @@ public class Convert {
 	/**
 	 * 转换为Integer数组<br>
 	 * 
+	 * @param split 被转换的值
 	 * @return 结果
 	 */
 	public static Integer[] toIntArray(String str) {
@@ -421,6 +423,7 @@ public class Convert {
 	/**
 	 * 转换为String数组<br>
 	 * 
+	 * @param split 被转换的值
 	 * @return 结果
 	 */
 	public static String[] toStrArray(String str) {

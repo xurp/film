@@ -1,10 +1,11 @@
 package com.geekq.guns.core.base.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.geekq.guns.core.support.HttpKit;
+import com.geekq.guns.core.util.FileUtil;
 import com.geekq.guns.core.base.tips.SuccessTip;
 import com.geekq.guns.core.base.warpper.BaseControllerWarpper;
 import com.geekq.guns.core.page.PageInfoBT;
+import com.geekq.guns.core.support.HttpKit;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -100,10 +101,10 @@ public class BaseController {
      * @author fengshuonan
      * @date 2017年2月28日 下午2:53:19
      */
-//    protected ResponseEntity<byte[]> renderFile(String fileName, String filePath) {
-//        byte[] bytes = FileUtil.toByteArray(filePath);
-//        return renderFile(fileName, bytes);
-//    }
+    protected ResponseEntity<byte[]> renderFile(String fileName, String filePath) {
+        byte[] bytes = FileUtil.toByteArray(filePath);
+        return renderFile(fileName, bytes);
+    }
 
     /**
      * 返回前台文件流

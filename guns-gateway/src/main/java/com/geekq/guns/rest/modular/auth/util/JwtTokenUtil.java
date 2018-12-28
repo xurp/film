@@ -1,7 +1,7 @@
 package com.geekq.guns.rest.modular.auth.util;
 
-import com.geekq.guns.core.util.ToolUtil;
 import com.geekq.guns.rest.config.properties.JwtProperties;
+import com.geekq.guns.core.util.ToolUtil;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

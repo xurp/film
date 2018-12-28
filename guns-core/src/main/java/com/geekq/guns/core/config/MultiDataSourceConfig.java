@@ -30,7 +30,7 @@ import java.util.HashMap;
 @Configuration
 @ConditionalOnProperty(prefix = "guns.muti-datasource", name = "open", havingValue = "true")
 @EnableTransactionManagement(order = 2)
-@MapperScan(basePackages = {"com.geekq.guns.core.modular.*.dao"})
+@MapperScan(basePackages = {"com.geekq.guns.modular.*.dao"})
 public class MultiDataSourceConfig {
 
     @Bean

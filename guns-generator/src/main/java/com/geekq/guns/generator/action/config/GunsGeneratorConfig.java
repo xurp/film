@@ -26,7 +26,7 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
         dataSourceConfig.setDriverName("com.mysql.jdbc.Driver");
         dataSourceConfig.setUsername("root");
         dataSourceConfig.setPassword("root");
-        dataSourceConfig.setUrl("jdbc:mysql://127.0.0.1:3306/guns?characterEncoding=utf8");
+        dataSourceConfig.setUrl("jdbc:mysql://39.107.245.253:3306/guns?characterEncoding=utf8");
     }
 
     protected void strategyConfig() {

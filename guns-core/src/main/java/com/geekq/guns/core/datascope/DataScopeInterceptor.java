@@ -2,7 +2,6 @@ package com.geekq.guns.core.datascope;
 
 
 import com.baomidou.mybatisplus.toolkit.PluginUtils;
-import com.geekq.guns.core.datascope.DataScope;
 import com.geekq.guns.core.support.CollectionKit;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;

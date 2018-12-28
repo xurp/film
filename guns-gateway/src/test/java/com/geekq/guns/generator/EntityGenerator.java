@@ -50,8 +50,8 @@ public class EntityGenerator {
         });
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("root");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/rest?characterEncoding=utf8");
+        dsc.setPassword("nihaoma");
+        dsc.setUrl("jdbc:mysql://39.107.245.253:3306/rest?characterEncoding=utf8");
         mpg.setDataSource(dsc);
 
         // 策略配置

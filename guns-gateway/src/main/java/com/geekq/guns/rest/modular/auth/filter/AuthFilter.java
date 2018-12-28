@@ -1,9 +1,9 @@
 package com.geekq.guns.rest.modular.auth.filter;
 
-import com.geekq.guns.rest.common.exception.BizExceptionEnum;
 import com.geekq.guns.core.base.tips.ErrorTip;
 import com.geekq.guns.core.util.RenderUtil;
 import com.geekq.guns.rest.common.CurrentUser;
+import com.geekq.guns.rest.common.exception.BizExceptionEnum;
 import com.geekq.guns.rest.config.properties.JwtProperties;
 import com.geekq.guns.rest.modular.auth.util.JwtTokenUtil;
 import io.jsonwebtoken.JwtException;
@@ -45,7 +45,7 @@ public class AuthFilter extends OncePerRequestFilter {
         String ignoreUrl = jwtProperties.getIgnoreUrl();
         String[] ignoreUrls = ignoreUrl.split(",");
         for(int i=0;i<ignoreUrls.length;i++){
-            if(request.getServletPath().equals(ignoreUrls[i])){
+            if(request.getServletPath().startsWith(ignoreUrls[i])){
                 chain.doFilter(request, response);
                 return;
             }

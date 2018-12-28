@@ -3,7 +3,6 @@ package com.geekq.guns.rest.modular.example;
 import com.geekq.guns.rest.common.CurrentUser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**

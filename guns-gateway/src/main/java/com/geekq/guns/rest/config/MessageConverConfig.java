@@ -1,8 +1,8 @@
 package com.geekq.guns.rest.config;
 
+import com.geekq.guns.core.config.DefaultFastjsonConfig;
 import com.geekq.guns.rest.config.properties.RestProperties;
 import com.geekq.guns.rest.modular.auth.converter.WithSignMessageConverter;
-import com.geekq.guns.core.config.DefaultFastjsonConfig;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
