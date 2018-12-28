@@ -11,5 +11,7 @@
 ![整体流程](https://raw.githubusercontent.com/qiurunze123/imageall/master/qq.png)
 
 
+API网关 服务模块  JWT 登陆模块 影片模块 支付模块 服务模块 分布式事务 全链路监控 
 
+没有一个能打的 ！！！
 
