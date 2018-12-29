@@ -2,7 +2,6 @@ package com.geekq.guns.core.common.annotion;
 
 import com.geekq.guns.core.common.constant.dictmap.base.AbstractDictMap;
 import com.geekq.guns.core.common.constant.dictmap.base.SystemDict;
-import com.geekq.guns.core.common.constant.dictmap.base.SystemDict;
 
 import java.lang.annotation.*;
 

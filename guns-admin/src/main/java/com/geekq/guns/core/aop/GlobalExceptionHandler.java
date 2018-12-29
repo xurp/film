@@ -1,13 +1,12 @@
 package com.geekq.guns.core.aop;
 
-import com.geekq.guns.core.base.tips.ErrorTip;
 import com.geekq.guns.core.common.exception.BizExceptionEnum;
 import com.geekq.guns.core.common.exception.InvalidKaptchaException;
+import com.geekq.guns.core.base.tips.ErrorTip;
+import com.geekq.guns.core.exception.GunsException;
 import com.geekq.guns.core.log.LogManager;
 import com.geekq.guns.core.log.factory.LogTaskFactory;
 import com.geekq.guns.core.shiro.ShiroKit;
-import com.geekq.guns.core.support.HttpKit;
-import com.geekq.guns.core.exception.GunsException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -22,6 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.lang.reflect.UndeclaredThrowableException;
+
+import static com.geekq.guns.core.support.HttpKit.getIp;
+import static com.geekq.guns.core.support.HttpKit.getRequest;
 
 /**
  * 全局的的异常拦截器（拦截所有的控制器）（带有@RequestMapping注解的方法上都会拦截）
@@ -43,7 +45,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ErrorTip notFount(GunsException e) {
         LogManager.me().executeLog(LogTaskFactory.exceptionLog(ShiroKit.getUser().getId(), e));
-        HttpKit.getRequest().setAttribute("tip", e.getMessage());
+        getRequest().setAttribute("tip", e.getMessage());
         log.error("业务异常:", e);
         return new ErrorTip(e.getCode(), e.getMessage());
     }
@@ -64,8 +66,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DisabledAccountException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String accountLocked(DisabledAccountException e, Model model) {
-        String username = HttpKit.getRequest().getParameter("username");
-        LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账号被冻结", HttpKit.getIp()));
+        String username = getRequest().getParameter("username");
+        LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账号被冻结", getIp()));
         model.addAttribute("tips", "账号被冻结");
         return "/login.html";
     }
@@ -76,8 +78,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CredentialsException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String credentials(CredentialsException e, Model model) {
-        String username = HttpKit.getRequest().getParameter("username");
-        LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账号密码错误", HttpKit.getIp()));
+        String username = getRequest().getParameter("username");
+        LogManager.me().executeLog(LogTaskFactory.loginLog(username, "账号密码错误", getIp()));
         model.addAttribute("tips", "账号密码错误");
         return "/login.html";
     }
@@ -88,8 +90,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidKaptchaException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String credentials(InvalidKaptchaException e, Model model) {
-        String username = HttpKit.getRequest().getParameter("username");
-        LogManager.me().executeLog(LogTaskFactory.loginLog(username, "验证码错误", HttpKit.getIp()));
+        String username = getRequest().getParameter("username");
+        LogManager.me().executeLog(LogTaskFactory.loginLog(username, "验证码错误", getIp()));
         model.addAttribute("tips", "验证码错误");
         return "/login.html";
     }
@@ -101,7 +103,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ResponseBody
     public ErrorTip credentials(UndeclaredThrowableException e) {
-        HttpKit.getRequest().setAttribute("tip", "权限异常");
+        getRequest().setAttribute("tip", "权限异常");
         log.error("权限异常!", e);
         return new ErrorTip(BizExceptionEnum.NO_PERMITION.getCode(), BizExceptionEnum.NO_PERMITION.getMessage());
     }
@@ -114,7 +116,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ErrorTip notFount(RuntimeException e) {
         LogManager.me().executeLog(LogTaskFactory.exceptionLog(ShiroKit.getUser().getId(), e));
-        HttpKit.getRequest().setAttribute("tip", "服务器未知运行时异常");
+        getRequest().setAttribute("tip", "服务器未知运行时异常");
         log.error("运行时异常:", e);
         return new ErrorTip(BizExceptionEnum.SERVER_ERROR.getCode(), BizExceptionEnum.SERVER_ERROR.getMessage());
     }

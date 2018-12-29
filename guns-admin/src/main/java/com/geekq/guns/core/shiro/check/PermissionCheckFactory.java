@@ -17,10 +17,10 @@ package com.geekq.guns.core.shiro.check;
 
 import com.geekq.guns.core.listener.ConfigListener;
 import com.geekq.guns.core.shiro.ShiroKit;
+import com.geekq.guns.core.shiro.ShiroUser;
 import com.geekq.guns.core.support.CollectionKit;
 import com.geekq.guns.core.support.HttpKit;
 import com.geekq.guns.core.util.SpringContextHolder;
-import com.geekq.guns.core.shiro.ShiroUser;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

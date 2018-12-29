@@ -3,14 +3,10 @@ package com.geekq.guns.rest.modular.cinema.serivce;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.geekq.guns.rest.common.persistence.dao.*;
-import com.geekq.guns.rest.common.persistence.model.MoocAreaDictT;
-import com.geekq.guns.rest.common.persistence.model.MoocBrandDictT;
-import com.geekq.guns.rest.common.persistence.model.MoocCinemaT;
-import com.geekq.guns.rest.common.persistence.model.MoocHallDictT;
 import com.geekq.guns.api.cinema.CinemaServiceAPI;
 import com.geekq.guns.api.cinema.vo.*;
 import com.geekq.guns.rest.common.persistence.dao.*;
+import com.geekq.guns.rest.common.persistence.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -184,19 +180,19 @@ public class DefaultCinemaServiceImpl implements CinemaServiceAPI {
     @Override
     public CinemaInfoVO getCinemaInfoById(int cinemaId){
 
+        // 数据实体
         MoocCinemaT moocCinemaT = moocCinemaTMapper.selectById(cinemaId);
-        if(moocCinemaT == null){
-            return new CinemaInfoVO();
-        }
+        // 将数据实体转换成业务实体
         CinemaInfoVO cinemaInfoVO = new CinemaInfoVO();
+        cinemaInfoVO.setCinemaAdress(moocCinemaT.getCinemaAddress());
         cinemaInfoVO.setImgUrl(moocCinemaT.getImgAddress());
         cinemaInfoVO.setCinemaPhone(moocCinemaT.getCinemaPhone());
         cinemaInfoVO.setCinemaName(moocCinemaT.getCinemaName());
         cinemaInfoVO.setCinemaId(moocCinemaT.getUuid()+"");
-        cinemaInfoVO.setCinemaId(moocCinemaT.getCinemaAddress());
 
         return cinemaInfoVO;
     }
+
     //6、获取所有电影的信息和对应的放映场次信息，根据影院编号
     @Override
     public List<FilmInfoVO> getFilmInfoByCinemaId(int cinemaId){
@@ -220,6 +216,19 @@ public class DefaultCinemaServiceImpl implements CinemaServiceAPI {
         FilmInfoVO filmInfoVO = moocFieldTMapper.getFilmInfoById(fieldId);
 
         return filmInfoVO;
+    }
+
+    @Override
+    public OrderQueryVO getOrderNeeds(int fieldId) {
+
+        OrderQueryVO orderQueryVO = new OrderQueryVO();
+
+        MoocFieldT moocFieldT = moocFieldTMapper.selectById(fieldId);
+
+        orderQueryVO.setCinemaId(moocFieldT.getCinemaId()+"");
+        orderQueryVO.setFilmPrice(moocFieldT.getPrice()+"");
+
+        return orderQueryVO;
     }
 
 }

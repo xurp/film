@@ -1,7 +1,7 @@
 package com.geekq.guns.core.shiro.factory;
 
 import com.geekq.guns.core.shiro.ShiroUser;
-import com.geekq.guns.core.modular.system.model.User;
+import com.geekq.guns.modular.system.model.User;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 
 import java.util.List;

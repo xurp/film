@@ -27,7 +27,7 @@ spring:
       max-file-size: 100MB
 
 mybatis-plus:
-  typeAliasesPackage: com.geekq.guns.core.modular.system.model
+  typeAliasesPackage: com.geekq.guns.modular.system.model
 
 log:
   path: /opt/guns/logs

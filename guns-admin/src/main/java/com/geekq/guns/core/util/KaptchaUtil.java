@@ -1,6 +1,6 @@
 package com.geekq.guns.core.util;
 
-import com.geekq.guns.core.config.properties.GunsProperties;
+import com.geekq.guns.config.properties.GunsProperties;
 
 /**
  * 验证码工具类

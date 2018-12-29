@@ -3,7 +3,7 @@ package com.geekq.guns.core.shiro;
 import com.geekq.guns.core.shiro.factory.IShiro;
 import com.geekq.guns.core.shiro.factory.ShiroFactroy;
 import com.geekq.guns.core.util.ToolUtil;
-import com.geekq.guns.core.modular.system.model.User;
+import com.geekq.guns.modular.system.model.User;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;

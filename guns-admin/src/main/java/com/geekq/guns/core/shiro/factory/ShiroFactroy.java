@@ -2,12 +2,12 @@ package com.geekq.guns.core.shiro.factory;
 
 import com.geekq.guns.core.common.constant.factory.ConstantFactory;
 import com.geekq.guns.core.common.constant.state.ManagerStatus;
-import com.geekq.guns.core.util.SpringContextHolder;
 import com.geekq.guns.core.shiro.ShiroUser;
 import com.geekq.guns.core.util.Convert;
-import com.geekq.guns.core.modular.system.dao.MenuMapper;
-import com.geekq.guns.core.modular.system.dao.UserMapper;
-import com.geekq.guns.core.modular.system.model.User;
+import com.geekq.guns.core.util.SpringContextHolder;
+import com.geekq.guns.modular.system.dao.MenuMapper;
+import com.geekq.guns.modular.system.dao.UserMapper;
+import com.geekq.guns.modular.system.model.User;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;

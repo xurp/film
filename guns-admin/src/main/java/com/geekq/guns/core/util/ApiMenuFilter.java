@@ -1,8 +1,8 @@
 package com.geekq.guns.core.util;
 
 import com.geekq.guns.core.common.constant.Const;
+import com.geekq.guns.config.properties.GunsProperties;
 import com.geekq.guns.core.node.MenuNode;
-import com.geekq.guns.core.config.properties.GunsProperties;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,8 +2,8 @@ package com.geekq.guns.core.log.factory;
 
 import com.geekq.guns.core.common.constant.state.LogSucceed;
 import com.geekq.guns.core.common.constant.state.LogType;
-import com.geekq.guns.core.modular.system.model.LoginLog;
-import com.geekq.guns.core.modular.system.model.OperationLog;
+import com.geekq.guns.modular.system.model.LoginLog;
+import com.geekq.guns.modular.system.model.OperationLog;
 
 import java.util.Date;
 

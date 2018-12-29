@@ -1,6 +1,6 @@
 package com.geekq.guns.core.common.constant.factory;
 
-import com.geekq.guns.core.modular.system.model.Dict;
+import com.geekq.guns.modular.system.model.Dict;
 
 import java.util.List;
 
