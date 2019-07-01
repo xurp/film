@@ -1,0 +1,31 @@
+项目架构:
+GEEKQ-CM
+        |_ guns-admin -- 登陆模块
+        |_ guns-api -- 影院api接口
+        |_ guns-cinema -- 影院模块
+        |_ guns-core -- 核心core包
+        |_ guns-film -- film模块
+        |_ guns-gateway -- 网关模块
+        |_ guns-generator -- 生成模块
+        |_ guns-order -- 订单模块
+        |_ guns-rest  -- rest模块
+        |_ guns-user  -- 用户模块
+        |_ guns-pay -- 支付模块
+        
+dubbo-monitor和brave负责[监控中心],与dubbo-admin做控制展示交互,zipkin应该是配合dubbo-monitor做展示
+核心部分是服务网关(服务聚合,权限控制,hystrix熔断...)和dubbo提供商(各个业务模块)
+以上由openstry做负载均衡,zookeeper做服务发现,由[监控中心]监控
+
+admin:
+配置文件:
+1. spring-devtools.properties:配置了restart.include.beetl
+2. application.yml:配置了port,自定义了一些配置,spring.profiles.active,前端路径配置,spring.mvc.devtools.restart(应该是热部署/重启的,需要在pom里加spring-boot-devtools)
+        文件大小,mybatis-typeAliasesPackage,log路径
+3. ehcache.xml:ehcache配置,很详细介绍
+4. logback-spring.xml:可以根据profiles做不同的日志配置
+
+
+前端(略)
+
+
+后端:
