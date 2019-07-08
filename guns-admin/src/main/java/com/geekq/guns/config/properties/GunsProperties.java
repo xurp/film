@@ -14,6 +14,7 @@ import static com.geekq.guns.core.util.ToolUtil.isEmpty;
  * @author geekq
  * @Date 2017/5/23 22:31
  */
+// [注]:这里用来读application.yml里的数据,然后由别的类调用.注意这里的变量使用了驼峰,而配置文件里是-
 @Component
 @ConfigurationProperties(prefix = GunsProperties.PREFIX)
 public class GunsProperties {

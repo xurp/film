@@ -16,6 +16,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD})
 public @interface BussinessLog {
 
+	// [注]:这里都设置了默认值
     /**
      * 业务的名称,例如:"修改菜单"
      */

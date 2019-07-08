@@ -24,10 +24,13 @@ public class SessionHolderInterceptor extends BaseController {
 
     @Around("cutService()")
     public Object sessionKit(ProceedingJoinPoint point) throws Throwable {
+    	// [注]:HttpSessionHolder用ThreadLocal做非Controller中获取当前session的工具类,这里估计就是每个方法都把session存一遍
+    	// [注]:与其说是标准拦截器,不如说是一个AOP
         HttpSessionHolder.put(super.getHttpServletRequest().getSession());
         try {
             return point.proceed();
         } finally {
+        	// [注]:但这里,每次都把ThreadLocal的session清空了.应该是这样的:首先执行point.proceed(),然后清空HttpSessionHolder,然后return执行结果
             HttpSessionHolder.remove();
         }
     }

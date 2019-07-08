@@ -41,6 +41,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     /**
      * 增加swagger的支持
      */
+    // [注]:在api项目里,其实没有这个,就一个Swagger2类,注解了@EnableSwagger2
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         if (gunsProperties.getSwaggerOpen()) {
@@ -48,7 +49,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
             registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
         }
     }
-
+    
+    /*-----------------------------druid开始--------------------------*/
+    
+    // [注]:这里的druid配置有点复杂了,可以参考seckill的DruidConfig,以下两个方法的配置都能在该类找到
     /**
      * druidServlet注册
      */
@@ -74,7 +78,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         filterRegistrationBean.addInitParameter("principalSessionName", "username");
         return filterRegistrationBean;
     }
-
+    
+    // [注]:从这里开始,是本项目独有的druid配置,是监听Spring的一套东西(Spring和Jdbc的关联监控)
+    // [注]:分别是: 1.定义拦截器 2.定义切入点(按方法名正则) 3.按类型拦截配置 4.定义通知类
+    
     /**
      * druid数据库连接池监控
      */
@@ -112,7 +119,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public Advisor druidStatAdvisor() {
         return new DefaultPointcutAdvisor(druidStatPointcut(), druidStatInterceptor());
     }
-
+    
+/*-----------------------------druid结束--------------------------*/
+    
     /**
      * xssFilter注册
      */
@@ -125,6 +134,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return registration;
     }
 
+    // [注]:以下两个应该是listener:ConfigListener的注册
     /**
      * RequestContextListener注册
      */

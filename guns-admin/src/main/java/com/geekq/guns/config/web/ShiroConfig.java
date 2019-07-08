@@ -40,9 +40,11 @@ public class ShiroConfig {
     /**
      * 安全管理器
      */
+	// [注]:同MySpringBoot的common.config.ShiroConfig,即注入SecurityManager shiro中主要部分
     @Bean
     public DefaultWebSecurityManager securityManager(CookieRememberMeManager rememberMeManager, CacheManager cacheShiroManager, SessionManager sessionManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        // [注]:shiroDbRealm一样是自定义的
         securityManager.setRealm(this.shiroDbRealm());
         securityManager.setCacheManager(cacheShiroManager);
         securityManager.setRememberMeManager(rememberMeManager);
@@ -53,6 +55,7 @@ public class ShiroConfig {
     /**
      * spring session管理器（多机环境）
      */
+    // [注]:这可能是用于多机分布式的spring session管理器配置,用的比较少
     @Bean
     @ConditionalOnProperty(prefix = "guns", name = "spring-session-open", havingValue = "true")
     public ServletContainerSessionManager servletContainerSessionManager() {
@@ -62,6 +65,7 @@ public class ShiroConfig {
     /**
      * session管理器(单机环境)
      */
+    // [注]:这个其实就是sessionManager,配置session的东西
     @Bean
     @ConditionalOnProperty(prefix = "guns", name = "spring-session-open", havingValue = "false")
     public DefaultWebSessionManager defaultWebSessionManager(CacheManager cacheShiroManager, GunsProperties gunsProperties) {
@@ -81,6 +85,7 @@ public class ShiroConfig {
     /**
      * 缓存管理器 使用Ehcache实现
      */
+    // [注]:这个用的比较少
     @Bean
     public CacheManager getCacheShiroManager(EhCacheManagerFactoryBean ehcache) {
         EhCacheManager ehCacheManager = new EhCacheManager();
@@ -91,6 +96,7 @@ public class ShiroConfig {
     /**
      * 项目自定义的Realm
      */
+    // [注]:自定义的Realm需要注册,然后在securityManager设置
     @Bean
     public ShiroDbRealm shiroDbRealm() {
         return new ShiroDbRealm();
@@ -99,6 +105,7 @@ public class ShiroConfig {
     /**
      * rememberMe管理器, cipherKey生成见{@code Base64Test.java}
      */
+    // [注]:以下两个是比较标准的rememberMe管理器,似乎MySpringBoot里的更好
     @Bean
     public CookieRememberMeManager rememberMeManager(SimpleCookie rememberMeCookie) {
         CookieRememberMeManager manager = new CookieRememberMeManager();
@@ -170,6 +177,8 @@ public class ShiroConfig {
     /**
      * 在方法中 注入 securityManager,进行代理控制
      */
+    // [注]:这个方法用的也比较少,但确实有这样的写法,MethodInvokingFactoryBean是一种静态注入的方式
+    // [注]:实体A在spring实例化时,非静态变量B也会实体化(但可能B是单例的?于是用静态注入的方法?)
     @Bean
     public MethodInvokingFactoryBean methodInvokingFactoryBean(DefaultWebSecurityManager securityManager) {
         MethodInvokingFactoryBean bean = new MethodInvokingFactoryBean();
@@ -183,13 +192,14 @@ public class ShiroConfig {
      * 用于在实现了Initializable接口的Shiro bean初始化时调用Initializable接口回调(例如:UserRealm)
      * 在实现了Destroyable接口的Shiro bean销毁时调用 Destroyable接口回调(例如:DefaultSecurityManager)
      */
+    // [注]:以下两个方法似乎都和开启shiro注解有关
     @Bean
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
 
     /**
-     * 启用shrio授权注解拦截方式，AOP式方法级权限检查
+     * 启用shiro授权注解拦截方式，AOP式方法级权限检查
      */
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(DefaultWebSecurityManager securityManager) {

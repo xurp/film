@@ -21,6 +21,7 @@ public class LogManager {
     private LogManager() {
     }
 
+    // [注]:这里的LogManager没被spring管理,自己建立了一个静态的LogManager,然后用me()返回
     public static LogManager logManager = new LogManager();
 
     public static LogManager me() {

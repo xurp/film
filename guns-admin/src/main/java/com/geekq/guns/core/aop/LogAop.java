@@ -1,6 +1,7 @@
 package com.geekq.guns.core.aop;
 
 import com.geekq.guns.core.common.annotion.BussinessLog;
+import com.geekq.guns.core.common.constant.dictmap.DeptDict;
 import com.geekq.guns.core.common.constant.dictmap.base.AbstractDictMap;
 import com.geekq.guns.core.log.LogManager;
 import com.geekq.guns.core.log.LogObjectHolder;
@@ -77,6 +78,7 @@ public class LogAop {
         Object[] params = point.getArgs();
 
         //获取操作名称
+        // [注]:例:@BussinessLog(value = "修改部门", key = "simplename", dict = DeptDict.class)
         BussinessLog annotation = currentMethod.getAnnotation(BussinessLog.class);
         String bussinessName = annotation.value();
         String key = annotation.key();
@@ -90,8 +92,10 @@ public class LogAop {
 
         //如果涉及到修改,比对变化
         String msg;
+        // [注]:见上面的注解例子,这里的LogObjectHolder用来保存修改前的object,然后在这里做一个对比,写到日志里
         if (bussinessName.indexOf("修改") != -1 || bussinessName.indexOf("编辑") != -1) {
             Object obj1 = LogObjectHolder.me().get();
+            // [注]:这也是一个封装工具类,获取所有请求的值
             Map<String, String> obj2 = HttpKit.getRequestParameters();
             msg = Contrast.contrastObj(dictClass, key, obj1, obj2);
         } else {

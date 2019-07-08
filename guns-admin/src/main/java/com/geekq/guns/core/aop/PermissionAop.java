@@ -16,6 +16,7 @@
 package com.geekq.guns.core.aop;
 
 import com.geekq.guns.core.common.annotion.Permission;
+import com.geekq.guns.core.common.constant.Const;
 import com.geekq.guns.core.shiro.check.PermissionCheckManager;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -31,6 +32,7 @@ import java.lang.reflect.Method;
 /**
  * AOP 权限自定义检查
  */
+// [注]:其实也可以用shiro自带的@RequiresPermissions
 @Aspect
 @Component
 @Order(200)
@@ -46,9 +48,11 @@ public class PermissionAop {
         MethodSignature ms = (MethodSignature) point.getSignature();
         Method method = ms.getMethod();
         Permission permission = method.getAnnotation(Permission.class);
+        // [注]:例:@Permission(Const.ADMIN_NAME)
         Object[] permissions = permission.value();
         if (permissions == null || permissions.length == 0) {
             //检查全体角色
+        	// [注]:若注解里是空的值,那么直接查permission,大致意思就是每个menu里都有允许访问的permission,逻辑大概是:user-role-menu-permission,然后用注解permission看user能否访问
             boolean result = PermissionCheckManager.checkAll();
             if (result) {
                 return point.proceed();
@@ -57,6 +61,7 @@ public class PermissionAop {
             }
         } else {
             //检查指定角色
+        	// [注]:如果注解里有值,查用户有没有这个permission,有的话就能访问
             boolean result = PermissionCheckManager.check(permissions);
             if (result) {
                 return point.proceed();

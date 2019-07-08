@@ -4,6 +4,7 @@ import com.geekq.guns.core.common.constant.factory.ConstantFactory;
 import com.geekq.guns.core.common.constant.factory.IConstantFactory;
 import com.geekq.guns.core.common.exception.BizExceptionEnum;
 import com.geekq.guns.core.exception.GunsException;
+import com.geekq.guns.core.util.SpringContextHolder;
 
 import java.lang.reflect.Method;
 
@@ -16,8 +17,10 @@ import java.lang.reflect.Method;
 public class DictFieldWarpperFactory {
 
     public static Object createFieldWarpper(Object parameter, String methodName) {
+    	// [注]:这里没有用注入的方式,直接用了SpringContextHolder.getBean
         IConstantFactory constantFactory = ConstantFactory.me();
         try {
+        	// 这个方法大概的意思是:dictmap里存了些方法名,用这个方法实现methodName(parameter)
             Method method = IConstantFactory.class.getMethod(methodName, parameter.getClass());
             return method.invoke(constantFactory, parameter);
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-项目架构:
+项目架构:(其实本项目是基于guns框架,参考https://www.cnblogs.com/byronliu029/p/9386193.html)
 GEEKQ-CM
         |_ guns-admin -- 登陆模块
         |_ guns-api -- 影院api接口
@@ -29,3 +29,29 @@ admin:
 
 
 后端:
+1. guns:两个启动类(存疑,见注释)
+2. guns.config:包括EhCacheConfig,SpringSessionConfig(分布式时用redis共享session,目前关闭)和SwaggerConfig
+3. guns.properties:两个类读配置文件,给其他类用
+4. guns.web:WebConfig进行了swagger,详细Druid,XSS,listener和验证码的配置.ShiroConfig大部分和MySpringBoot类似
+5. guns.core.aop:GlobalExceptionHandler全局异常处理,LogAop是全局异常处理,看似简单很有技术含量,PermissionAop是自定义的权限检查,其实也可以用shiro自带的@RequiresPermissions,
+          比如MySpringBoot里就用的这个,反而感觉简单
+6. guns.beetl:BeetlConfiguration是配置类不用看,ShiroExt是一个工具类,封装了shiro权限的一些方法,最简单的如SecurityUtils.getSubject(),而MySpringBoot的LoginController里,
+          每次都要Subject subject = SecurityUtils.getSubject()一遍,当然不好了
+7. guns.annotion:BussinessLog记需要记录的业务日志,Permission是角色的英文名称(估计是sys_role里的tips?)
+8. guns.constant:两个接口,这样省了public static final,用的时候直接接口.变量就行了
+9. guns.cache:两个标识缓存的接口
+10.guns.dictmap(.base):里面的类在controller方法上的@BusinessLog的dict使用,就是根据key在对应类的map里取一个中文解释罢了.AbstractDictMap是基类
+11.guns.dictmap/constant.factory:ConstantFactory引入了一些mapper,查一些东西,工具类.PageFactory配合mybatisplus的Page做默认设置.DictFieldWarpperFactory用来invoke反射方法
+12.guns.state:全是enum,比如是ALL(0, null)的,那么就有Integer val;String message;两个属性;是LOGIN("登录日志"),的就只有一个属性String message;了.valueOf方法用来根据int获取String
+13.guns.exception:一个自定义的空InvalidKaptchaException类,一个BizExceptionEnum类,错误码和错误说明
+14.guns.intercept:SessionHolderInterceptor用来做静态调用session的"拦截器",GunsUserFilter同quick-cli里的StatelessAccessControlFilter,是认证过滤器
+
+
+
+
+
+
+
+
+
+

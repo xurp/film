@@ -44,7 +44,10 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public ErrorTip notFount(GunsException e) {
+    	// [注]:ShiroKit.getUser(),工具类里直接获取user,有用
+    	// [注]:这里还用了LogTaskFactory日志工厂类,见该类注释
         LogManager.me().executeLog(LogTaskFactory.exceptionLog(ShiroKit.getUser().getId(), e));
+        // [注]:getRequest()也是工具类的方法,随时随地获取request(这里更进一步,还包装了一下,见该方法注释)
         getRequest().setAttribute("tip", e.getMessage());
         log.error("业务异常:", e);
         return new ErrorTip(e.getCode(), e.getMessage());

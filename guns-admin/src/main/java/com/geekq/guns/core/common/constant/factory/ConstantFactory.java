@@ -26,6 +26,8 @@ import java.util.List;
  * @author fengshuonan
  * @date 2017年2月13日 下午10:55:21
  */
+// [注]:这里的@DependsOn("springContextHolder")代表,必须加载了这个之后再进入本类进行操作
+// [注]:至于这里为什么不用autowired,存疑,可能是RoleMapper这种接口没有注解?
 @Component
 @DependsOn("springContextHolder")
 public class ConstantFactory implements IConstantFactory {
@@ -37,6 +39,7 @@ public class ConstantFactory implements IConstantFactory {
     private MenuMapper menuMapper = SpringContextHolder.getBean(MenuMapper.class);
     private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
 
+    // [注]:返回单例的自己
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
     }
@@ -76,6 +79,7 @@ public class ConstantFactory implements IConstantFactory {
     /**
      * 通过角色ids获取角色名称
      */
+    // [注]:这里用了springboot的缓存@Cacheable,用参数roleIds作为唯一标识
     @Override
     @Cacheable(value = Cache.CONSTANT, key = "'" + CacheKey.ROLES_NAME + "'+#roleIds")
     public String getRoleName(String roleIds) {
@@ -276,6 +280,7 @@ public class ConstantFactory implements IConstantFactory {
         if (ToolUtil.isEmpty(id)) {
             return null;
         } else {
+        	// [注]:EntityWrapper和Wrapper是mybatisplus里的东西,只是用来查询的工具
             EntityWrapper<Dict> wrapper = new EntityWrapper<>();
             List<Dict> dicts = dictMapper.selectList(wrapper.eq("pid", id));
             if (dicts == null || dicts.size() == 0) {

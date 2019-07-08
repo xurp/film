@@ -37,6 +37,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @since 0.9
  */
+// [注]:可参考quick-cli里的StatelessAccessControlFilter
+// [注]:AccessControlFilter提供了访问控制的基础功能,比如是否允许访问/当访问拒绝时如何处理等
 public class GunsUserFilter extends AccessControlFilter {
 
     /**
@@ -66,6 +68,7 @@ public class GunsUserFilter extends AccessControlFilter {
      * and then immediately returns <code>false</code>, thereby preventing the chain from continuing so the redirect may
      * execute.
      */
+    // [注]:表示当访问拒绝时是否已经处理了,如果返回true表示需要继续处理,如果返回false表示该拦截器实例已经处理了,将直接返回即可
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
         HttpServletResponse httpServletResponse = WebUtils.toHttp(response);

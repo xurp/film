@@ -38,6 +38,7 @@ public class ShiroExt {
      *
      * @return ShiroUser
      */
+    // [注]:ShiroUser自定义的,比如还加了dept
     public ShiroUser getUser() {
         if (isGuest()) {
             return null;
@@ -113,6 +114,7 @@ public class ShiroExt {
      * @param permission 权限名
      * @return 拥有权限：true，否则false
      */
+    // [注]:角色和权限是两回事.角色比较大,权限比较小(比如添加权限和查看权限)
     public boolean hasPermission(String permission) {
         return getSubject() != null && permission != null
                 && permission.length() > 0
@@ -134,6 +136,7 @@ public class ShiroExt {
      *
      * @return 通过身份验证：true，否则false
      */
+    // [注]:这里要注意,remember me的用户返回的是false
     public boolean authenticated() {
         return getSubject() != null && getSubject().isAuthenticated();
     }
@@ -178,6 +181,7 @@ public class ShiroExt {
         return "";
     }
 
+    // [注]:这个似乎是beetl和shiro的整合,不用管
     public static void main(String[] args) {
         GroupTemplate gt = new GroupTemplate();
         gt.registerFunctionPackage("shiro", new ShiroExt());
