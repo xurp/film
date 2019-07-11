@@ -38,7 +38,10 @@ public class PermissionCheckFactory implements ICheck {
     public static ICheck me() {
         return SpringContextHolder.getBean(ICheck.class);
     }
-
+    
+    /**
+     * 检查当前登录用户是否拥有指定的角色访问当
+     */
     @Override
     public boolean check(Object[] permissions) {
         ShiroUser user = ShiroKit.getUser();
@@ -52,6 +55,9 @@ public class PermissionCheckFactory implements ICheck {
         return false;
     }
 
+    /**
+     * 检查当前登录用户是否拥有当前请求的servlet的权限
+     */
     @Override
     public boolean checkAll() {
         HttpServletRequest request = HttpKit.getRequest();
@@ -59,6 +65,7 @@ public class PermissionCheckFactory implements ICheck {
         if (null == user) {
             return false;
         }
+        // [注]:这里调用了监听器里的路径
         String requestURI = request.getRequestURI().replaceFirst(ConfigListener.getConf().get("contextPath"), "");
         String[] str = requestURI.split("/");
         if (str.length > 3) {

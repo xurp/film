@@ -28,6 +28,7 @@ public class LogManager {
         return logManager;
     }
 
+    // [注]:感觉本类LogManager就是搞了一个简单的单例模式,因此也只有一个ScheduledThreadPoolExecutor线程来做log写入
     public void executeLog(TimerTask task) {
         executor.schedule(task, OPERATE_DELAY_TIME, TimeUnit.MILLISECONDS);
     }

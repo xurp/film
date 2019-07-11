@@ -16,6 +16,8 @@ dubbo-monitor和brave负责[监控中心],与dubbo-admin做控制展示交互,zi
 核心部分是服务网关(服务聚合,权限控制,hystrix熔断...)和dubbo提供商(各个业务模块)
 以上由openstry做负载均衡,zookeeper做服务发现,由[监控中心]监控
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 admin:
 配置文件:
 1. spring-devtools.properties:配置了restart.include.beetl
@@ -45,11 +47,46 @@ admin:
 12.guns.state:全是enum,比如是ALL(0, null)的,那么就有Integer val;String message;两个属性;是LOGIN("登录日志"),的就只有一个属性String message;了.valueOf方法用来根据int获取String
 13.guns.exception:一个自定义的空InvalidKaptchaException类,一个BizExceptionEnum类,错误码和错误说明
 14.guns.intercept:SessionHolderInterceptor用来做静态调用session的"拦截器",GunsUserFilter同quick-cli里的StatelessAccessControlFilter,是认证过滤器
+15.guns.listener:ConfigListener是一个监听器,感觉就是为了获取项目运行环境的路径,有些类需要这个路径
+16.guns.log:LogManager开了定时线程(延后10ms)写log,LogObjectHolder用来临时存放被修改的bean
+17.guns.log.factory:LogFactory是工厂类,用静态方法返回Log实体.LogTaskFactory的静态方法返回TimerTask,TimerTask里做了日志插入,这些人物就在LogManager的线程里做
+18.guns.shiro:ShiroDbRealm就是自定义Realm,ShiroKit是简单的Shiro工具类,ShiroUser是自定义的Authentication对象,主要为了ShiroDbRealm里的SimpleAuthenticationInfo
+19.guns.shiro.check:PermissionCheckFactory定义了权限自定义检查方法,PermissionCheckManager调用这些方法.主要配合controller方法上的@Permission自定义检查
+20.guns.shiro.factory:ShiroFactroy实际上也是一个工具类
+21.guns.tag:可能和beetl有关,不用看
+22.guns.util:一些工具类,比如根据反射比较两个实体的不同
+23.guns.code.controller/factory/service:代码生成控制器,不用看
+24.guns.system.controller/dao/mapping/model/service/service.impl:全是偏系统(admin)的,不是业务的,可以细看,暂时跳了
+25.guns.system.factory:工具类,dto转entity,值得一看
+26.guns.system.transfer:似乎是Dto包
+27.guns.warpper:在BaseControllerWarpper(控制器查询结果的包装类基类)里调用,主要是controller里返回List<Map<String, Object>>的时候(如UserMgrController#list),往map里加点额外属性
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+api:(类似dubbo-api)
+配置文件:
+1. default-config.properties:配置了spring.aop.proxy-target-class=true(使用cglib代理),mybatis-plus和beetl(和数据库配置无关,配了一些参数)
 
 
+前端(略)
 
 
+后端:
+1. api.cinema:cinema相关的interface
+2. api.cinema.vo:全部注解了@Data(lombok)的VO(get，set和toString)
+3. api.film:film相关的interface
+4. api.film.vo:类似
+5. api.order/user.*:同上
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+cinema:(类似dubbo-server)
+配置文件:
+1. application.yml:port,mybatis-plus,mysql,dubbo,log的配置
+
+前端(略)
+
+后端:
+1. rest:类似spring5和guns-admin的两个启动类,注解了@EnableDubboConfiguration(可能也不必要)
+2. rest.common:
 
 
 

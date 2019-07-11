@@ -3,7 +3,11 @@ package com.geekq.guns.modular.system.factory;
 import com.geekq.guns.core.util.ToolUtil;
 import com.geekq.guns.modular.system.model.User;
 import com.geekq.guns.modular.system.transfer.UserDto;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
+import org.springframework.validation.BindingResult;
 
 /**
  * 用户创建工厂
@@ -18,6 +22,7 @@ public class UserFactory {
             return null;
         } else {
             User user = new User();
+            // [注]:这里直接把UserDto转成User.UserDto是用户在页面输入的,传到方法里(UserMgrController#add(@Valid UserDto user, BindingResult result)) 转成User等于实体类对应db
             BeanUtils.copyProperties(userDto, user);
             return user;
         }

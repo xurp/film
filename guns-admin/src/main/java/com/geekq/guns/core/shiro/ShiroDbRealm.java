@@ -18,6 +18,7 @@ import java.util.Set;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 
+	// [注]:本类和MySpringBoot的MyShiroRealm类似
     /**
      * 登录认证
      */
@@ -27,6 +28,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
         IShiro shiroFactory = ShiroFactroy.me();
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         User user = shiroFactory.user(token.getUsername());
+        // [注]:这里获取的是自定义的ShiroUser,具体可见MyShiroRealm#doGetAuthenticationInfo的注释5
         ShiroUser shiroUser = shiroFactory.shiroUser(user);
         SimpleAuthenticationInfo info = shiroFactory.info(shiroUser, user, super.getName());
         return info;
