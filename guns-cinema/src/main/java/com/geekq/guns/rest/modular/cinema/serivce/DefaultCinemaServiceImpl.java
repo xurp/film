@@ -197,6 +197,7 @@ public class DefaultCinemaServiceImpl implements CinemaServiceAPI {
     @Override
     public List<FilmInfoVO> getFilmInfoByCinemaId(int cinemaId){
 
+    	// [注]:估计是一个cinema有很多film,一个film又有很多FilmFieldVO(hall,price等)
         List<FilmInfoVO> filmInfos = moocFieldTMapper.getFilmInfos(cinemaId);
 
         return filmInfos;

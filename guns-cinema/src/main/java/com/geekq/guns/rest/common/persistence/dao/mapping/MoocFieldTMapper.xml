@@ -15,6 +15,7 @@
     </resultMap>
 
     <!-- 一对多的查询 -->
+    <!-- 注:一对多查询,因该是一个film对应多个filmFields,用的是film_id的left join,查出来的条目会自动放到collection filmFields里,很神奇吧? -->
     <resultMap id="getFilmInfoMap" type="com.geekq.guns.api.cinema.vo.FilmInfoVO">
         <result column="film_id" property="filmId"></result>
         <result column="film_name" property="filmName"></result>

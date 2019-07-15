@@ -86,9 +86,15 @@ cinema:(类似dubbo-server)
 
 后端:
 1. rest:类似spring5和guns-admin的两个启动类,注解了@EnableDubboConfiguration(可能也不必要)
-2. rest.common:
+2. rest.aop:GlobalExceptionHandler继承了另一个项目guns-core的BaseControllerExceptionHandler,全局异常处理
+3. rest.exception:BizExceptionEnum简单的枚举类,错误代码
+4. rest.dao:全部继承了mybatisplus的BaseMapper,配合mapping,其中MoocFieldTMapper.xml用了一对多查询
+5. rest.model:全都继承了mybatisplus里的Model<T>,有些还用mabatis的@TableName标注了表名,字段的话包括@TableId,@TableField
+6. rest.config:MessageConverConfig是一个签名校验messageConverter暂时不知道有什么用,MybatisPlusConfig就是简单配置,WebConfig注册了一些过滤器(如jwt)/拦截器
+7. rest.properties:读项目自定义配置文件,让其它类调用
 
-
+之后暂时没看,我认为对我来说是一种折磨
+但这整个dubbo项目还是挺好的.
 
 
 
